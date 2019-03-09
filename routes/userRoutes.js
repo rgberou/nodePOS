@@ -4,8 +4,10 @@ var router=express.Router();
 
 /*Contains routes for the User*/
 
-router.get('/',function(req,res){
-	res.send('This is the home page')
+router.get('/User/:id',function(req,res){
+	res.send('The id you specified is ' + req.params.id);
 });
+
+
 
 module.exports=router;
