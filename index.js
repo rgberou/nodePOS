@@ -22,27 +22,13 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/custom', express.static(__dirname + '/custom'));
 //Index of the site
 
-app.get('/',function(req,res){
-	res.sendFile(path.join(__dirname+'/views/index.html'));
-});
-
-
-
-app.post('/',function(req,res){
-    //res.sendFile(path.join(__dirname+'/views/index.html'));
-	console.log(req.body.email);
-	console.log(req.body.password);
-
-	
-    res.redirect('/');
-
-});
-
 //setting up routes
-var userRoutes=require('./routes/userRoutes')
+var userRoutes=require('./routes/userRoutes');
 app.get('/User/:id',userRoutes);
-app.get('/registration',userRoutes);
 app.get('/',userRoutes);
+app.post('/',userRoutes);
+app.get('/registration',userRoutes);
+app.post('/registration',userRoutes);
 
 
 //Invalid url Page
@@ -75,9 +61,9 @@ app.get('*', function(req, res){
  
  //console.log(sequelize)
 
-//Models definition
+//Initialize model definition
 
-var userModel=require('./models/users');
+var userModel=require('./config/userConfig');
 var userdetailsModel=require('./models/userdetails');
 
 var User=userModel.usermodel(sequelize,Sequelize);
